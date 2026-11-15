@@ -1,0 +1,1302 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DES Security Lab — educational cryptography implementation and security analysis.">
+    <title>DES Security Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="DES Security Lab home">
+            <span class="brand-mark">D<span>·</span></span>
+            <span>
+                <strong>DES Security Lab</strong>
+                <small>CRYPTOGRAPHY WORKSPACE</small>
+                <strong class="developer-name">RA'AD BANI KHALAF</strong>
+            </span>
+        </a>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="nav">
+            <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+            <a class="nav-link" href="#workbench"><span>⌁</span> DES Workbench</a>
+            <a class="nav-link" href="#bruteforce"><span>⌘</span> Brute Force Lab</a>
+            <a class="nav-link" href="#keyanalysis"><span>◫</span> Key Analysis</a>
+            <a class="nav-link" href="#weakkeys"><span>WK</span> Weak Keys</a>
+            <a class="nav-link" href="#avalanche"><span>AE</span> Avalanche Effect</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            <div>
+                <strong>Educational environment</strong>
+                <small>Local project workspace</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="breadcrumb">
+                PROJECTS <span>/</span> CRYPTOGRAPHY <span>/</span> <b>DES LAB</b>
+            </div>
+
+            <div class="top-actions">
+                <span class="semester">FALL 2026–2027</span>
+                <button class="avatar" aria-label="Project profile">D</button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero" id="overview">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow">
+                    <span class="pulse"></span>
+                    CRYPTOGRAPHY • PROJECT-BASED LEARNING
+                </div>
+
+                <h1>
+                    Explore the mechanics.<br>
+                    <em>Expose the weaknesses.</em>
+                </h1>
+
+                <p>
+                    An interactive learning environment for implementing the Data
+                    Encryption Standard and investigating its security limitations
+                    through controlled experiments.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button primary" href="#workbench">
+                        Explore workbench <span>↗</span>
+                    </a>
+
+                    <a class="button secondary" href="#about">
+                        Project overview
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="hero-visual" aria-label="Decorative encryption visualization">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="core">
+                    <div class="core-lock">⌑</div>
+                    <strong>DES</strong>
+                    <small>16 ROUND FEISTEL</small>
+                </div>
+
+                <span class="bit bit-a">01001101</span>
+                <span class="bit bit-b">10110100</span>
+                <span class="bit bit-c">11001010</span>
+                <span class="bit bit-d">00101101</span>
+
+                <div class="visual-caption">
+                    DATA TRANSFORMATION <b>● LIVE CONCEPT</b>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NOTICE -->
+        <section class="notice">
+            <span class="notice-icon">!</span>
+
+            <div>
+                <strong>Educational use only</strong>
+                <p>
+                    DES is obsolete for modern data protection. This lab demonstrates
+                    its design and weaknesses; never use it to secure real-world information.
+                </p>
+            </div>
+
+            <span class="notice-tag">SECURITY NOTE</span>
+        </section>
+
+        <!-- DES WORKBENCH -->
+        <section class="workbench-section" id="workbench">
+
+            <div class="section-head workbench-title">
+                <div>
+                    <div class="eyebrow">CRYPTOGRAPHY MODULE</div>
+                    <h2>DES Workbench</h2>
+                    <p class="section-subtitle">
+                        Encrypt and decrypt messages using our Python DES implementation.
+                    </p>
+                </div>
+
+                <span class="workbench-status">
+                    <i></i> ENGINE READY
+                </span>
+            </div>
+
+            <div class="workbench-grid">
+
+                <!-- ENCRYPTION -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">01 / ENCRYPTION</span>
+                            <h3>Encrypt Message</h3>
+                        </div>
+                        <span class="panel-icon">↗</span>
+                    </div>
+
+                    <label for="plaintextInput">Plaintext</label>
+
+                    <textarea
+                        id="plaintextInput"
+                        rows="5"
+                        placeholder="Enter your message here..."
+                    ></textarea>
+
+                    <label for="keyInput">DES Encryption Key</label>
+
+                    <input
+                        type="text"
+                        id="keyInput"
+                        maxlength="16"
+                        placeholder="133457799BBCDFF1"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+                    <small class="field-hint">
+                        Enter exactly 16 hexadecimal characters (64 bits).
+                    </small>
+
+                    <button type="button" class="workbench-button" id="encryptButton">
+                        Encrypt Message <span>→</span>
+                    </button>
+
+                    <div class="result-heading">
+                        <label for="ciphertextOutput">Ciphertext Output</label>
+                        <span>HEX FORMAT</span>
+                    </div>
+
+                    <textarea
+                        id="ciphertextOutput"
+                        rows="5"
+                        placeholder="Encrypted output will appear here..."
+                        readonly
+                    ></textarea>
+
+                    <p id="encryptMessage" class="workbench-message" aria-live="polite"></p>
+
+                </article>
+
+                <!-- DECRYPTION -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">02 / DECRYPTION</span>
+                            <h3>Decrypt Message</h3>
+                        </div>
+                        <span class="panel-icon">↙</span>
+                    </div>
+
+                    <label for="decryptInput">Ciphertext (HEX)</label>
+
+                    <textarea
+                        id="decryptInput"
+                        rows="5"
+                        placeholder="Paste your hexadecimal ciphertext here..."
+                    ></textarea>
+
+                    <label for="decryptKeyInput">DES Decryption Key</label>
+
+                    <input
+                        type="text"
+                        id="decryptKeyInput"
+                        maxlength="16"
+                        placeholder="133457799BBCDFF1"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+                    <small class="field-hint">
+                        Use the same key that was used for encryption.
+                    </small>
+
+                    <button type="button" class="workbench-button decrypt-button" id="decryptButton">
+                        Decrypt Message <span>→</span>
+                    </button>
+
+                    <div class="result-heading">
+                        <label for="decryptedOutput">Recovered Plaintext</label>
+                        <span>UTF-8 FORMAT</span>
+                    </div>
+
+                    <textarea
+                        id="decryptedOutput"
+                        rows="5"
+                        placeholder="Decrypted message will appear here..."
+                        readonly
+                    ></textarea>
+
+                    <p id="decryptMessage" class="workbench-message" aria-live="polite"></p>
+
+                </article>
+
+            </div>
+
+            <div class="workbench-warning">
+                <span>!</span>
+                <p>
+                    <strong>Security reminder:</strong>
+                    DES uses ECB mode in this educational implementation.
+                    It is not suitable for protecting real-world sensitive information.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- BRUTE FORCE LAB -->
+        <section class="workbench-section" id="bruteforce">
+
+            <div class="section-head workbench-title">
+                <div>
+                    <div class="eyebrow">SECURITY ANALYSIS MODULE</div>
+                    <h2>Brute Force Lab</h2>
+                    <p class="section-subtitle">
+                        Simulate a controlled DES key search and analyze the
+                        impact of reduced key sizes.
+                    </p>
+                </div>
+
+                <span class="workbench-status">
+                    <i></i> ENGINE READY
+                </span>
+            </div>
+
+            <div class="workbench-grid">
+
+                <!-- ATTACK CONFIGURATION -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">03 / ATTACK SIMULATION</span>
+                            <h3>Key Search Configuration</h3>
+                        </div>
+                        <span class="panel-icon">⌘</span>
+                    </div>
+
+                    <label for="brutePlaintext">Known Plaintext</label>
+
+                    <textarea
+                        id="brutePlaintext"
+                        rows="3"
+                        placeholder="Enter the original 8-character message..."
+                    ></textarea>
+
+                    <label for="bruteCiphertext">Target Ciphertext (HEX)</label>
+
+                    <textarea
+                        id="bruteCiphertext"
+                        rows="3"
+                        placeholder="Enter the 16-character hexadecimal ciphertext..."
+                    ></textarea>
+
+                    <label for="bruteKeyBits">Reduced Key Size</label>
+
+                    <select id="bruteKeyBits">
+                        <option value="8">8 bits — 256 keys</option>
+                        <option value="12">12 bits — 4,096 keys</option>
+                        <option value="16">16 bits — 65,536 keys</option>
+                        <option value="20">20 bits — 1,048,576 keys</option>
+                        <option value="24">24 bits — 16,777,216 keys</option>
+                    </select>
+
+                    <small class="field-hint">
+                        Educational simulation only. Maximum search space: 24 bits.
+                    </small>
+
+                    <button
+                        type="button"
+                        class="workbench-button"
+                        id="bruteForceButton"
+                    >
+                        Start Brute Force <span>→</span>
+                    </button>
+
+                    <p
+                        id="bruteForceMessage"
+                        class="workbench-message"
+                        aria-live="polite"
+                    ></p>
+
+                </article>
+
+                <!-- ATTACK RESULTS -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">04 / ATTACK RESULTS</span>
+                            <h3>Search Results</h3>
+                        </div>
+                        <span class="panel-icon">◈</span>
+                    </div>
+
+                    <div class="result-heading">
+                        <label>Attack Status</label>
+                        <span>RESULT</span>
+                    </div>
+
+                    <div id="bruteForceStatus" class="brute-result">
+                        Waiting for an attack...
+                    </div>
+
+                    <label for="bruteRecoveredKey">Recovered DES Key</label>
+
+                    <input
+                        type="text"
+                        id="bruteRecoveredKey"
+                        placeholder="No key recovered yet"
+                        readonly
+                    >
+
+                    <div class="brute-stats">
+
+                        <div class="brute-stat">
+                            <span>Candidate</span>
+                            <strong id="bruteCandidate">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Attempts</span>
+                            <strong id="bruteAttempts">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Total Keys</span>
+                            <strong id="bruteTotalKeys">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Elapsed Time</span>
+                            <strong id="bruteElapsed">—</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="workbench-warning">
+                        <span>!</span>
+                        <p>
+                            <strong>Learning objective:</strong>
+                            This experiment demonstrates how reducing the key space
+                            makes exhaustive key search computationally feasible.
+                        </p>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- KEY SIZE ANALYSIS -->
+        <section class="workbench-section" id="keyanalysis">
+
+            <div class="section-head workbench-title">
+                <div>
+                    <div class="eyebrow">SECURITY ANALYSIS MODULE</div>
+                    <h2>Key Size Analysis</h2>
+                    <p class="section-subtitle">
+                        Evaluate how increasing key size affects the search space
+                        and estimated exhaustive search time.
+                    </p>
+                </div>
+
+                <span class="workbench-status">
+                    <i></i> BENCHMARK READY
+                </span>
+            </div>
+
+            <div class="workbench-grid">
+
+                <!-- ANALYSIS CONFIGURATION -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">05 / EXPERIMENT CONFIGURATION</span>
+                            <h3>Benchmark Settings</h3>
+                        </div>
+                        <span class="panel-icon">◫</span>
+                    </div>
+
+                    <label for="keyAnalysisPlaintext">
+                        Benchmark Plaintext
+                    </label>
+
+                    <input
+                        type="text"
+                        id="keyAnalysisPlaintext"
+                        value="DES TEST"
+                        maxlength="8"
+                        autocomplete="off"
+                    >
+
+                    <small class="field-hint">
+                        Enter exactly 8 UTF-8 bytes. The default "DES TEST"
+                        contains exactly 8 bytes.
+                    </small>
+
+                    <div class="workbench-warning">
+                        <span>!</span>
+                        <p>
+                            <strong>Benchmark method:</strong>
+                            The experiment measures 128 key candidates for each
+                            key size, then estimates the full search duration.
+                            Full key spaces are not exhaustively tested.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="workbench-button"
+                        id="keyAnalysisButton"
+                    >
+                        Run Key Size Analysis <span>→</span>
+                    </button>
+
+                    <p
+                        id="keyAnalysisMessage"
+                        class="workbench-message"
+                        aria-live="polite"
+                    ></p>
+
+                </article>
+
+                <!-- ANALYSIS SUMMARY -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">06 / ANALYSIS SUMMARY</span>
+                            <h3>Search Space Comparison</h3>
+                        </div>
+                        <span class="panel-icon">▥</span>
+                    </div>
+
+                    <div class="brute-stats">
+
+                        <div class="brute-stat">
+                            <span>Tested Key Sizes</span>
+                            <strong>5</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Sample Per Size</span>
+                            <strong>128</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Largest Search Space</span>
+                            <strong>24 bits</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Maximum Candidates</span>
+                            <strong>16.7M</strong>
+                        </div>
+
+                    </div>
+
+                    <p class="field-hint">
+                        All estimates are based on the average measured time
+                        per key in the sample benchmark.
+                    </p>
+
+                </article>
+
+            </div>
+
+            <!-- RESULTS TABLE -->
+            <article class="workbench-panel key-analysis-results">
+
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-number">07 / EXPERIMENTAL RESULTS</span>
+                        <h3>Key Size Benchmark Results</h3>
+                    </div>
+                    <span class="panel-icon">▤</span>
+                </div>
+
+                <div class="trace-table-wrapper">
+                    <table class="trace-table" id="keyAnalysisTable">
+                        <thead>
+                            <tr>
+                                <th>Key Size</th>
+                                <th>Total Keys</th>
+                                <th>Sample Size</th>
+                                <th>Measured Time</th>
+                                <th>Average / Key</th>
+                                <th>Estimated Full Search</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="keyAnalysisTableBody">
+                            <tr>
+                                <td colspan="6">
+                                    Run the benchmark to display results.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </article>
+
+            <!-- CHART -->
+            <article class="workbench-panel key-analysis-chart-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-number">08 / VISUAL ANALYSIS</span>
+                        <h3>Key Space Growth</h3>
+                    </div>
+                    <span class="panel-icon">▥</span>
+                </div>
+
+                <p class="field-hint">
+                    Estimated exhaustive search duration for each key size.
+                    The vertical axis uses a logarithmic scale.
+                </p>
+
+                <div class="key-analysis-chart-container"
+                     style="position:relative; width:100%; height:340px;">
+                    <canvas id="keyAnalysisChart"></canvas>
+                </div>
+
+            </article>
+
+            <div class="workbench-warning">
+                <span>!</span>
+                <p>
+                    <strong>Interpretation:</strong>
+                    The key space grows exponentially as key size increases.
+                    Estimated full-search times are extrapolated from a 128-key
+                    sample and are not actual exhaustive-search measurements.
+                    Results depend on hardware and execution conditions.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- WEAK KEY ANALYSIS -->
+        <section class="workbench-section" id="weakkeys">
+
+            <div class="section-head workbench-title">
+                <div>
+                    <div class="eyebrow">DES SECURITY ANALYSIS MODULE</div>
+                    <h2>Weak Key Analysis</h2>
+                    <p class="section-subtitle">
+                        Investigate weak and semi-weak DES keys
+                        and verify their characteristic encryption behavior.
+                    </p>
+                </div>
+
+                <span class="workbench-status">
+                    <i></i> TEST ENGINE READY
+                </span>
+            </div>
+
+            <div class="workbench-grid">
+
+                <!-- TEST CONFIGURATION -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">09 / KEY ANALYSIS</span>
+                            <h3>Weak Key Verification</h3>
+                        </div>
+                        <span class="panel-icon">⌑</span>
+                    </div>
+
+                    <p class="field-hint">
+                        Test the special behavior of DES weak keys and
+                        semi-weak key pairs using the implemented DES engine.
+                    </p>
+
+                    <div class="workbench-warning">
+                        <span>!</span>
+                        <p>
+                            <strong>Test methodology:</strong>
+                            For a weak key, applying encryption twice with
+                            the same key should recover the original block.
+                            For a semi-weak pair, encryption with the two
+                            keys in sequence should recover the original block.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="workbench-button"
+                        id="weakKeyTestButton"
+                    >
+                        Run Weak Key Tests <span>→</span>
+                    </button>
+
+                    <p
+                        id="weakKeyMessage"
+                        class="workbench-message"
+                        aria-live="polite"
+                    ></p>
+
+                </article>
+
+                <!-- TEST SUMMARY -->
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-number">10 / VERIFICATION SUMMARY</span>
+                            <h3>Test Results</h3>
+                        </div>
+                        <span class="panel-icon">◈</span>
+                    </div>
+
+                    <div class="brute-stats" id="weakKeySummary">
+
+                        <div class="brute-stat">
+                            <span>Total Tests</span>
+                            <strong id="weakTotalTests">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Passed</span>
+                            <strong id="weakPassedTests">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Failed</span>
+                            <strong id="weakFailedTests">—</strong>
+                        </div>
+
+                    </div>
+
+                    <div id="weakKeyOverallStatus" class="brute-result">
+                        Waiting for verification...
+                    </div>
+
+                    <p class="field-hint">
+                        Expected results: 4 weak keys and 6 semi-weak pairs.
+                    </p>
+
+                </article>
+
+            </div>
+
+            <!-- WEAK KEYS RESULTS -->
+            <article class="workbench-panel weak-results-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-number">11 / WEAK KEY RESULTS</span>
+                        <h3>Weak DES Keys</h3>
+                    </div>
+                    <span class="panel-icon">▤</span>
+                </div>
+
+                <div class="trace-table-wrapper">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>DES Key</th>
+                                <th>First Encryption</th>
+                                <th>Recovered Block</th>
+                                <th>Verification</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="weakKeysResults">
+                            <tr>
+                                <td colspan="5">
+                                    Run the tests to display weak key results.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </article>
+
+            <!-- SEMI-WEAK KEYS RESULTS -->
+            <article class="workbench-panel weak-results-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-number">12 / SEMI-WEAK KEY RESULTS</span>
+                        <h3>Semi-Weak DES Key Pairs</h3>
+                    </div>
+                    <span class="panel-icon">▤</span>
+                </div>
+
+                <div class="trace-table-wrapper">
+                    <table class="trace-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Key 1</th>
+                                <th>Key 2</th>
+                                <th>Recovered Block</th>
+                                <th>Verification</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="semiWeakKeysResults">
+                            <tr>
+                                <td colspan="5">
+                                    Run the tests to display semi-weak key pair results.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </article>
+
+            <div class="workbench-warning">
+                <span>!</span>
+                <p>
+                    <strong>Security interpretation:</strong>
+                    Weak and semi-weak DES keys have special mathematical
+                    properties that reduce the effective security of encryption.
+                    These keys should never be used in cryptographic applications.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             AVALANCHE EFFECT ANALYSIS
+        ================================================== -->
+
+        <section class="workbench-section" id="avalanche">
+
+            <div class="section-head workbench-title">
+
+                <div>
+                    <div class="eyebrow">SECURITY ANALYSIS MODULE</div>
+
+                    <h2>Avalanche Effect Analyzer</h2>
+
+                    <p class="section-subtitle">
+                        Measure how changing a single input bit affects
+                        the resulting DES ciphertext.
+                    </p>
+                </div>
+
+                <span class="workbench-status">
+                    <i></i> ANALYSIS READY
+                </span>
+
+            </div>
+
+
+            <!-- EXPERIMENT DESCRIPTION -->
+
+            <div class="workbench-warning">
+
+                <span>!</span>
+
+                <p>
+                    <strong>Experimental objective:</strong>
+                    A small change in plaintext or encryption key should
+                    produce a significant change in the ciphertext.
+                    DES operates on 64-bit blocks.
+                </p>
+
+            </div>
+
+
+            <!-- TEST CONFIGURATION -->
+
+            <div class="workbench-grid">
+
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-number">13 / EXPERIMENT CONTROL</span>
+                            <h3>Run Avalanche Tests</h3>
+                        </div>
+
+                        <span class="panel-icon">⌬</span>
+
+                    </div>
+
+                    <p class="field-hint">
+                        The system performs two experiments:
+                        one plaintext bit change and one effective key bit change.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="workbench-button"
+                        id="avalancheTestButton"
+                    >
+                        Run Avalanche Tests <span>→</span>
+                    </button>
+
+                    <p
+                        class="workbench-message"
+                        id="avalancheMessage"
+                        aria-live="polite"
+                    >
+                        Ready to perform avalanche analysis.
+                    </p>
+
+                </article>
+
+
+                <!-- ORIGINAL VALUES -->
+
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-number">14 / BASELINE ENCRYPTION</span>
+                            <h3>Original DES Values</h3>
+                        </div>
+
+                        <span class="panel-icon">◈</span>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Original Plaintext</label>
+
+                        <div class="result-code" id="avalancheOriginalPlaintext">
+                            0123456789ABCDEF
+                        </div>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Original Key</label>
+
+                        <div class="result-code" id="avalancheOriginalKey">
+                            133457799BBCDFF1
+                        </div>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Original Ciphertext</label>
+
+                        <div class="result-code" id="avalancheOriginalCiphertext">
+                            85E813540F0AB405
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="eyebrow" style="margin-top: 30px;">
+                EXPERIMENT RESULTS
+            </div>
+
+            <div class="brute-stats" id="avalancheSummary">
+
+                <div class="brute-stat">
+                    <span>Block Size</span>
+                    <strong id="avalancheBlockSize">64 bits</strong>
+                </div>
+
+                <div class="brute-stat">
+                    <span>Plaintext Changed Bits</span>
+                    <strong id="avalanchePlaintextBits">—</strong>
+                </div>
+
+                <div class="brute-stat">
+                    <span>Key Changed Bits</span>
+                    <strong id="avalancheKeyBits">—</strong>
+                </div>
+
+                <div class="brute-stat">
+                    <span>Average Change</span>
+                    <strong id="avalancheAverage">—</strong>
+                </div>
+
+            </div>
+
+
+            <!-- DETAILED RESULTS -->
+
+            <div class="workbench-grid">
+
+                <!-- PLAINTEXT TEST -->
+
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-number">15 / PLAINTEXT EXPERIMENT</span>
+                            <h3>Plaintext Bit Change</h3>
+                        </div>
+
+                        <span class="panel-icon">01</span>
+
+                    </div>
+
+                    <p class="field-hint">
+                        One plaintext bit is changed while the encryption key
+                        remains unchanged.
+                    </p>
+
+                    <div class="field-group">
+
+                        <label>Modified Plaintext</label>
+
+                        <div class="result-code" id="avalancheModifiedPlaintext">
+                            —
+                        </div>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Modified Ciphertext</label>
+
+                        <div class="result-code" id="avalanchePlaintextCiphertext">
+                            —
+                        </div>
+
+                    </div>
+
+                    <div class="brute-stats">
+
+                        <div class="brute-stat">
+                            <span>Changed Bits</span>
+                            <strong id="avalanchePlaintextChangedBits">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Change Percentage</span>
+                            <strong id="avalanchePlaintextPercentage">—</strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- KEY TEST -->
+
+                <article class="workbench-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-number">16 / KEY EXPERIMENT</span>
+                            <h3>Encryption Key Bit Change</h3>
+                        </div>
+
+                        <span class="panel-icon">02</span>
+
+                    </div>
+
+                    <p class="field-hint">
+                        One effective DES key bit is changed while the
+                        original plaintext remains unchanged.
+                    </p>
+
+                    <div class="field-group">
+
+                        <label>Modified Key</label>
+
+                        <div class="result-code" id="avalancheModifiedKey">
+                            —
+                        </div>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Modified Ciphertext</label>
+
+                        <div class="result-code" id="avalancheKeyCiphertext">
+                            —
+                        </div>
+
+                    </div>
+
+                    <div class="brute-stats">
+
+                        <div class="brute-stat">
+                            <span>Changed Bits</span>
+                            <strong id="avalancheKeyChangedBits">—</strong>
+                        </div>
+
+                        <div class="brute-stat">
+                            <span>Change Percentage</span>
+                            <strong id="avalancheKeyPercentage">—</strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- CHART -->
+
+            <article class="workbench-panel" style="margin-top: 24px;">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="panel-number">17 / VISUAL COMPARISON</span>
+                        <h3>Avalanche Effect Comparison</h3>
+                    </div>
+
+                    <span class="panel-icon">▥</span>
+
+                </div>
+
+                <p class="field-hint">
+                    Percentage of ciphertext bits changed in each experiment.
+                    The theoretical reference is approximately 50%.
+                </p>
+
+                <div style="position: relative; height: 320px; width: 100%;">
+
+                    <canvas id="avalancheChart"></canvas>
+
+                </div>
+
+            </article>
+
+
+            <!-- INTERPRETATION -->
+
+            <div class="workbench-warning" style="margin-top: 24px;">
+
+                <span>i</span>
+
+                <p id="avalancheInterpretation">
+                    Run the experiment to display the security interpretation.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- END AVALANCHE EFFECT ANALYSIS -->
+
+
+        <!-- PROJECT SNAPSHOT -->
+        <section class="section-head">
+
+            <div>
+                <div class="eyebrow">PROJECT SNAPSHOT</div>
+                <h2>At a glance</h2>
+            </div>
+
+            <span class="phase-chip">
+                <i></i> Phase 2 · Security Analysis
+            </span>
+
+        </section>
+
+        <section class="stats">
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>BLOCK SIZE</span>
+                    <span class="stat-icon">▤</span>
+                </div>
+                <strong>64 <small>bits</small></strong>
+                <p>Fixed-size data block</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>EFFECTIVE KEY</span>
+                    <span class="stat-icon">⌑</span>
+                </div>
+                <strong>56 <small>bits</small></strong>
+                <p>8 parity bits are excluded</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>ROUND COUNT</span>
+                    <span class="stat-icon">↻</span>
+                </div>
+                <strong>16</strong>
+                <p>Feistel network rounds</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>LAB MODULES</span>
+                    <span class="stat-icon">◈</span>
+                </div>
+                <strong>05</strong>
+                <p>Interactive research modules</p>
+            </article>
+
+        </section>
+
+        <!-- MODULES -->
+        <section class="section-head modules-head" id="modules">
+
+            <div>
+                <div class="eyebrow">INTERACTIVE ENVIRONMENT</div>
+                <h2>Research modules</h2>
+                <p class="section-subtitle">
+                    Each module is connected to tested Python logic as implementation progresses.
+                </p>
+            </div>
+
+            <span class="text-link">
+                MODULE ROADMAP <span>↗</span>
+            </span>
+
+        </section>
+
+        <section class="module-grid">
+
+            <article class="module-card featured">
+                <div class="module-icon cyan">⌁</div>
+                <span class="module-state">IMPLEMENTED</span>
+                <h3>DES Workbench</h3>
+                <p>
+                    Encrypt and decrypt data, inspect round keys, and explore
+                    the 16-round Feistel structure.
+                </p>
+                <div class="module-footer">
+                    <span>IMPLEMENTATION</span>
+                    <b>01 <span>→</span></b>
+                </div>
+            </article>
+
+            <article class="module-card">
+                <div class="module-icon violet">⌘</div>
+                <span class="module-state">IMPLEMENTED</span>
+                <h3>Brute Force Lab</h3>
+                <p>
+                    Run a controlled DES key-search attack, recover reduced-size keys,
+                    and measure attempts and execution time.
+                </p>
+                <div class="module-footer">
+                    <span>ATTACK SIMULATION</span>
+                    <b>02 <span>→</span></b>
+                </div>
+            </article>
+
+            <article class="module-card">
+                <div class="module-icon amber">◫</div>
+                <span class="module-state">IMPLEMENTED</span>
+                <h3>Key Size Analysis</h3>
+                <p>
+                    Compare reduced search spaces from 8 to 24 bits
+                    using measured benchmarks and estimated search times.
+                </p>
+                <div class="module-footer">
+                    <span>PERFORMANCE STUDY</span>
+                    <b>03 <span>→</span></b>
+                </div>
+            </article>
+
+            <article class="module-card">
+                <div class="module-icon rose">⌑</div>
+                <span class="module-state">IMPLEMENTED</span>
+                <h3>Weak Key Explorer</h3>
+                <p>
+                    Investigate weak and semi-weak DES keys and verify
+                    their characteristic behavior using automated tests.
+                </p>
+                <div class="module-footer">
+                    <span>KEY ANALYSIS</span>
+                    <b>04 <span>→</span></b>
+                </div>
+            </article>
+
+            <article class="module-card">
+                <div class="module-icon green">⌬</div>
+                <span class="module-state">IMPLEMENTED</span>
+                <h3>Avalanche Analyzer</h3>
+                <p>
+                    Change one input bit and measure how many ciphertext
+                    bits change in plaintext and key experiments.
+                </p>
+                <div class="module-footer">
+                    <span>DIFFUSION EXPERIMENT</span>
+                    <b>05 <span>→</span></b>
+                </div>
+            </article>
+
+            <article class="module-card report-card" id="about">
+                <div class="report-mark">DOC</div>
+                <span class="module-state planned">IN PREPARATION</span>
+                <h3>Research & Documentation</h3>
+                <p>
+                    Collect methodology, reproducible results, references,
+                    screenshots, and project findings.
+                </p>
+                <div class="module-footer">
+                    <span>FINAL DELIVERABLE</span>
+                    <b>06 <span>→</span></b>
+                </div>
+            </article>
+
+        </section>
+
+        <footer>
+            <span>DES SECURITY LAB <b>•</b> ACADEMIC PROJECT 2026–2027</span>
+            <span>BUILT FOR LEARNING · VERIFIED BY TESTS</span>
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

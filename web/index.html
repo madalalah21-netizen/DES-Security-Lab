@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DES Security Lab — educational cryptography implementation and security analysis.">
+  <title>DES Security Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="DES Security Lab home">
+        <span class="brand-mark">D<span>·</span></span>
+        <span><strong>DES Security Lab</strong><small>CRYPTOGRAPHY WORKSPACE</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav">
+        <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+        <a class="nav-link" href="#modules"><span>⌁</span> DES Workbench</a>
+        <a class="nav-link" href="#modules"><span>⌘</span> Brute Force Lab</a>
+        <a class="nav-link" href="#modules"><span>◫</span> Key Analysis</a>
+        <a class="nav-link" href="#modules"><span>⌑</span> Weak Keys</a>
+        <a class="nav-link" href="#modules"><span>⌬</span> Avalanche Effect</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong>Educational environment</strong><small>Local project workspace</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb">PROJECTS <span>/</span> CRYPTOGRAPHY <span>/</span> <b>DES LAB</b></div>
+        <div class="top-actions"><span class="semester">FALL 2026–2027</span><button class="avatar" aria-label="Project profile">D</button></div>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> CRYPTOGRAPHY • PROJECT-BASED LEARNING</div>
+          <h1>Explore the mechanics.<br><em>Expose the weaknesses.</em></h1>
+          <p>An interactive learning environment for implementing the Data Encryption Standard and investigating its security limitations through controlled experiments.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#modules">Explore workbench <span>↗</span></a>
+            <a class="button secondary" href="#about">Project overview</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Decorative encryption visualization">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="core"><div class="core-lock">⌑</div><strong>DES</strong><small>16 ROUND FEISTEL</small></div>
+          <span class="bit bit-a">01001101</span><span class="bit bit-b">10110100</span>
+          <span class="bit bit-c">11001010</span><span class="bit bit-d">00101101</span>
+          <div class="visual-caption">DATA TRANSFORMATION <b>● LIVE CONCEPT</b></div>
+        </div>
+      </section>
+
+      <section class="notice">
+        <span class="notice-icon">!</span>
+        <div><strong>Educational use only</strong><p>DES is obsolete for modern data protection. This lab demonstrates its design and weaknesses; never use it to secure real-world information.</p></div>
+        <span class="notice-tag">SECURITY NOTE</span>
+      </section>
+
+      <section class="section-head">
+        <div><div class="eyebrow">PROJECT SNAPSHOT</div><h2>At a glance</h2></div>
+        <span class="phase-chip"><i></i> Phase 0 · Interface foundation</span>
+      </section>
+      <section class="stats">
+        <article class="stat-card"><div class="stat-top"><span>BLOCK SIZE</span><span class="stat-icon">▤</span></div><strong>64 <small>bits</small></strong><p>Fixed-size data block</p></article>
+        <article class="stat-card"><div class="stat-top"><span>EFFECTIVE KEY</span><span class="stat-icon">⌑</span></div><strong>56 <small>bits</small></strong><p>8 parity bits are excluded</p></article>
+        <article class="stat-card"><div class="stat-top"><span>ROUND COUNT</span><span class="stat-icon">↻</span></div><strong>16</strong><p>Feistel network rounds</p></article>
+        <article class="stat-card"><div class="stat-top"><span>LAB MODULES</span><span class="stat-icon">◈</span></div><strong>05</strong><p>Planned interactive modules</p></article>
+      </section>
+
+      <section class="section-head modules-head" id="modules">
+        <div><div class="eyebrow">INTERACTIVE ENVIRONMENT</div><h2>Research modules</h2><p class="section-subtitle">Each module will be connected to tested Python logic as implementation progresses.</p></div>
+        <span class="text-link">MODULE ROADMAP <span>↗</span></span>
+      </section>
+      <section class="module-grid">
+        <article class="module-card featured"><div class="module-icon cyan">⌁</div><span class="module-state">NEXT BUILD</span><h3>DES Workbench</h3><p>Encrypt and decrypt data, inspect round keys, and explore the 16-round Feistel structure.</p><div class="module-footer"><span>IMPLEMENTATION</span><b>01 <span>→</span></b></div></article>
+        <article class="module-card"><div class="module-icon violet">⌘</div><span class="module-state planned">PLANNED</span><h3>Brute Force Lab</h3><p>Run a controlled key-search demonstration and record tested keys and elapsed time.</p><div class="module-footer"><span>ATTACK SIMULATION</span><b>02 <span>→</span></b></div></article>
+        <article class="module-card"><div class="module-icon amber">◫</div><span class="module-state planned">PLANNED</span><h3>Key Size Analysis</h3><p>Compare reduced search spaces from 8 to 24 bits using measured experiments.</p><div class="module-footer"><span>PERFORMANCE STUDY</span><b>03 <span>→</span></b></div></article>
+        <article class="module-card"><div class="module-icon rose">⌑</div><span class="module-state planned">PLANNED</span><h3>Weak Key Explorer</h3><p>Investigate weak and semi-weak DES keys and verify their characteristic behavior.</p><div class="module-footer"><span>KEY ANALYSIS</span><b>04 <span>→</span></b></div></article>
+        <article class="module-card"><div class="module-icon green">⌬</div><span class="module-state planned">PLANNED</span><h3>Avalanche Analyzer</h3><p>Change one input bit and measure how many ciphertext bits change.</p><div class="module-footer"><span>DIFFUSION EXPERIMENT</span><b>05 <span>→</span></b></div></article>
+        <article class="module-card report-card" id="about"><div class="report-mark">DOC</div><span class="module-state planned">IN PREPARATION</span><h3>Research & Documentation</h3><p>Collect methodology, reproducible results, references, screenshots, and project findings.</p><div class="module-footer"><span>FINAL DELIVERABLE</span><b>06 <span>→</span></b></div></article>
+      </section>
+
+      <footer><span>DES SECURITY LAB <b>•</b> ACADEMIC PROJECT 2026–2027</span><span>BUILT FOR LEARNING · VERIFIED BY TESTS</span></footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
