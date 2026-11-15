@@ -32,7 +32,7 @@ from weak_keys import (
 from avalanche_effect import run_avalanche_analysis
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="web", static_folder="web", static_url_path="")
 
 
 # ==================================================
